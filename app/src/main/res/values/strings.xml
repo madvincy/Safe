@@ -1,0 +1,203 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="title_activity_driver_map">Map</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigatioNn_drawer_open">Open navigation drawer</string>
+    <string name="navigatioNn_drawer_close">Close navigation drawer</string>
+    //facebook
+    <string name="facebook_app_id">505431489898763</string>
+    <string name="fb_login_protocol_scheme">fb505431489898763</string>
+
+    <string name="actionN_settings">Settings</string>
+    <string name="app_name">SAFE</string>
+    <string name="action_sign_in_short">Register</string>
+    <string name="email">Email</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
+    <string name="send_password_reset_email">Send Password reset email</string>
+    <string name="remove_user">Remove user</string>
+    <string name="new_pass">New Password</string>
+    <string name="title_activity_profile">Firebase</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="prompt_password">Please enter your password</string>
+    <string name="btn_link_to_register">Not a member? Get registered in Safe now!</string>
+    <string name="btn_link_to_login">Already registered. Login Me!</string>
+    <string name="title_activity_reset_password">ResetPasswordActivity</string>
+    <string name="btn_forgot_password">Forgot your password?</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="btn_back"><![CDATA[<< Back]]></string>
+    <string name="hint_new_email">New Email</string>
+    <string name="btn_change">Change</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="email_id">Email ID</string>
+    <string name="title_activity_user_home">UserHomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_gallery">Gallery</string>
+    <string name="title_activity_import">Import</string>
+    <string name="title_activity_slideshow">Slideshow</string>
+    <string name="title_activity_tools">Tools</string>
+
+    <array name="genres">
+        <item>rock</item>
+        <item>sufi</item>
+        <item>pop</item>
+        <item>folk</item>
+    </array>
+    <array name="Landtype">
+        <item>Rent</item>
+        <item>personal</item>
+    </array>
+    <array name="Tractortype">
+        <item>175 HP Or Greater Tractors</item>
+        <item>100 HP to 174 HP Tractors</item>
+        <item>40 HP to 99 HP Tractors</item>
+        <item>Less than 40 HP Tractors</item>
+        <item>Combines Harvesters</item>
+        <item>Cotton Pickers/Strippers</item>
+        <item>Forage Harvesters</item>
+        <item>Headers</item>
+        <item>Forage Wagons</item>
+        <item>Grain Augers/Conveyors</item>
+        <item>Grain Carts</item>
+        <item>Planting Equipment</item>
+        <item>Air Seeders/Air Carts</item>
+        <item>Grain Drills</item>
+        <item>Planters</item>
+        <item>Seed Tenders</item>
+        <item>Tillage Equipment</item>
+        <item>Disks</item>
+        <item>Field Cultivators</item>
+        <item>Land Rollers</item>
+        <item>Mulch Finishers</item>
+        <item>Plows</item>
+        <item>Rippers</item>
+        <item>Rotary Tillage</item>
+        <item>Row Crop Cultivators</item>
+        <item>Vertical Tillage</item>
+        <item>Hay and Forage Equipment</item>
+        <item>Bale Accumulators / Movers</item>
+        <item>Disc Mowers</item>
+        <item>Mower Conditioners/Windrowers</item>
+        <item>Rakes/Tedders</item>
+        <item>Rotary Mowers</item>
+        <item>Round Balers</item>
+        <item>Square Balers</item>
+        <item>Stalk Choppers/Flail Mowers</item>
+        <item>Tub Grinders/Bale Processors</item>
+        <item>Chemical Applicators</item>
+        <item>Fertilizer Applicators</item>
+        <item>Other Chemical Applicators</item>
+
+        <item>Manure Spreaders</item>
+
+        <item>Poultry Litter Equipment</item>
+
+        <item>Material Handling Trailers</item>
+        <item>Livestock Trailers</item>
+
+
+        <item>Riding Lawn Mowers</item>
+        <item>Stand On Lawn Mowers</item>
+        <item>Walk-Behind Lawn Mowers</item>
+        <item>Zero Turn Lawn Mowers</item>
+        <item>Chainsaws</item>
+
+    </array>
+    <array name="Driverno">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </array>
+    <array name="Types">
+        <item>rock</item>
+        <item>sufi</item>
+        <item>pop</item>
+        <item>folk</item>
+    </array>
+    <array name="land">
+        <item>on rent</item>
+        <item>on sale</item>
+    </array>
+    <string name="title_activity_find_machinery">FindMachinery</string>
+    <string name="add">Add</string>
+    <string name="enter_name">Enter name</string>
+    <string name="artists">Artists</string>
+    <string name="Land">land</string>
+    <string name="tap_on_an_artist_to_add_and_view_tracks">Tap on an artist to add and view artist tracks</string>
+    <string name="tap_on_an_land_to_add_and_view_land">Tap on an Land to add and view land tracks</string>
+    <string name="title_activity_land_maps_positions">lands</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="tractors">tractors</string>
+    <string name="tap_on_an_tractor_to_add_and_view_tracks">tap_on_an_tractor_to_add_and_view_tracks</string>
+
+
+    <string name="menu_login">Log in</string>
+    <string name="menu_logout">Log out</string>
+    <string name="login_label">Log In</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Password</string>
+    <string name="send_text">Send</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec condimentum ante, quis mattis mi. Proin ut rhoncus libero, ac euismod neque. Ut suscipit, enim a facilisis consequat, orci lacus venenatis orci, at ultricies orci nulla sed ex. In condimentum viverra velit, eget feugiat libero imperdiet vel. Aenean pretium, lectus vitae bibendum bibendum, diam turpis convallis eros, quis tristique leo sapien at ipsum. Praesent eu odio id nulla lobortis auctor. Donec eget dolor eget nisl euismod commodo vel a lacus. Quisque ut justo vitae urna pharetra accumsan. Etiam dignissim neque iaculis mauris viverra, blandit rhoncus odio porttitor. Phasellus nibh arcu.</string>
+    <string name="title_sign_in">Welcome</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="heading_recent">Recent</string>
+    <string name="heading_my_posts">My Posts</string>
+    <string name="heading_my_top_posts">My Top Posts</string>
+    <string name="Delete_Account">Delete Account</string>
+
+    <string name="no_event">No event</string>
+    <string name="calendar_permission_required">Calendar access is required to manage your events</string>
+    <string name="all_day">All day</string>
+    <string name="grant_access">Grant access</string>
+    <string name="today">Today</string>
+    <string name="title">Title</string>
+    <string name="event_time">Event time</string>
+    <string name="event_calendar">Event calendar</string>
+    <string name="warning_empty_title">Event title is required</string>
+    <string name="choose_calendar">Choose a calendar</string>
+    <string name="create_event">Create new event</string>
+    <string name="edit_event">Edit event</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="confirm_delete">Delete this event?</string>
+    <string name="confirm_discard_changes">Discard changes?</string>
+    <string name="warning_missing_calendar">Please choose a calendar</string>
+    <string name="end_time">Ends\n%s</string>
+    <string name="default_calendar_name">Local Calendar</string>
+    <string name="event_created">Event created.</string>
+    <string name="event_updated">Event updated.</string>
+    <string name="event_deleted">Event deleted.</string>
+    <string name="morning">Morning</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="night">Night</string>
+    <string name="fahrenheit">%1$.1f\u00b0F</string>
+    <string name="show_weather">Show weather</string>
+    <string name="updating_weather" tools:ignore="TypographyEllipsis">Updating weather information...</string>
+    <string name="location_permission_required">Updating weather requires location access</string>
+    <string name="week_start">Week start</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
+    <string name="calendars">Calendars</string>
+    <string name="error_location">Unable to determine your location</string>
+    <string name="sign_out">sign out</string>
+</resources>

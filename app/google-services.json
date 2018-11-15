@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "862958340278",
+    "firebase_url": "https://safe-409a1.firebaseio.com",
+    "project_id": "safe-409a1",
+    "storage_bucket": "safe-409a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862958340278:android:af9cc472f45a7d09",
+        "android_client_info": {
+          "package_name": "com.example.madvincy.safe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862958340278-floouf4q0pdk371a18kscho0kkdohbt0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5-20wHzm8Iluv261yeCnIskqULQIj_Xo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
