@@ -23,6 +23,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email"
+        android:src="@drawable/ic_qr_scan_btn"
         android:layout_alignParentRight="true" />
     <!--<fragment-->
     <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
@@ -148,19 +149,20 @@
             <!--android:text="Land"-->
             <!--android:id="@+id/UberXl"/>-->
             <!--</RadioGroup>-->
-            <!--<Spinner-->
-                <!--android:id="@+id/Resource"-->
-                <!--android:layout_width="325dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_above="@+id/buttonAddTractor"-->
-                <!--android:layout_alignParentStart="true"-->
-                <!--android:entries="@array/Tractortype"></Spinner>-->
+            <Spinner
+                android:id="@+id/Resource"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/buttonAddTractor"
+                android:layout_alignParentStart="true"
+                android:entries="@array/Parkingtype"
+                android:layout_alignParentLeft="true"></Spinner>
 
             <Button
                 android:layout_gravity="bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Find Farm Resource"
+                android:text="Find Parking Place"
                 android:id="@+id/request"/>
         </LinearLayout>
     </LinearLayout>

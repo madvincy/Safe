@@ -1,5 +1,6 @@
 package com.example.madvincy.safe;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.madvincy.safe.findparking.map;
 import com.facebook.CallbackManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,7 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class signup2 extends AppCompatActivity {
-    private EditText model,make,secret,mcolor,reg_no,inputPassword,number;
+    private EditText model,make,secret,mcolor,number;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
     private Button btnSignup;
@@ -64,23 +66,42 @@ public class signup2 extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnSignup = (Button) findViewById(R.id.btn_signup);
         mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(userID).child("car info");
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveUserInformation();
+            }
+        });
+        mProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, 1);
+            }
+        });
+
     }
     private void saveUserInformation() {
         mModel = model.getText().toString();
         mMake = make.getText().toString();
         mColor = mcolor.getText().toString();
         mSecret = secret.getText().toString();
-        mRegno = reg_no.getText().toString();
+        mRegno = number.getText().toString();
 
 
         Map userInfo = new HashMap();
         userInfo.put("color", mColor);
-        userInfo.put("", mMake);
+        userInfo.put("make", mMake);
+        userInfo.put("secret key", mSecret);
+        userInfo.put("registration number", mRegno);
+        userInfo.put("model", mModel);
+
         mCustomerDatabase.updateChildren(userInfo);
 
         if(resultUri != null) {
 
-            StorageReference filePath = FirebaseStorage.getInstance().getReference().child("profile_images").child(userID).child("car");
+            StorageReference filePath = FirebaseStorage.getInstance().getReference().child("car profile_images").child(userID);
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), resultUri);
@@ -113,10 +134,21 @@ public class signup2 extends AppCompatActivity {
                     return;
                 }
             });
+
+
         }else{
             finish();
         }
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+            final Uri imageUri = data.getData();
+            resultUri = imageUri;
+            mProfileImage.setImageURI(resultUri);
+        }
     }
 
 

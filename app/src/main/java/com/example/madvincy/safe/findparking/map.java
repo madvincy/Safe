@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,12 +39,15 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.example.madvincy.safe.CustomerActivities.ActiveParkingActivity;
 import com.example.madvincy.safe.Dashboard;
 import com.example.madvincy.safe.MainActivity;
 import com.example.madvincy.safe.R;
 import com.example.madvincy.safe.booking.Booking;
 import com.example.madvincy.safe.parkinghistory.CustomerParkingHistory;
 import com.example.madvincy.safe.promotions.InviteFriend;
+import com.example.madvincy.safe.qrscanner.GenerateQr;
+import com.example.madvincy.safe.settings.CarSettings;
 import com.example.madvincy.safe.settings.CustomerSettings;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -89,6 +93,9 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         private GoogleMap mMap;
         Location mLastLocation;
         LocationRequest mLocationRequest;
+        private DatabaseReference mCustomerDatabase, mCustomercarDatabase;
+        private String mProfileImageUrl;
+        private ImageView mProfileImage;
 
         private FusedLocationProviderClient mFusedLocationClient;
 
@@ -96,6 +103,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         Spinner spinnerType;
 
         private LatLng pickupLocation;
+        private String emaile;
 
         private Boolean requestBol = false;
 
@@ -111,9 +119,11 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
         private ImageView mParkingPlaceProfileImage;
 
-        private TextView mParkingPlaceName, mParkingPlacePhone, mParkingPlaceCapacity;
+        private TextView email,mParkingPlaceName, mParkingPlacePhone, mParkingPlaceCapacity;
 
         private RadioGroup mRadioGroup;
+        private FirebaseAuth mAuth;
+        private String userID;
 
         private RatingBar mRatingBar;
 
@@ -130,11 +140,10 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
                 FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
                 fab.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
-                        }
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(map.this, GenerateQr.class));
+                    }
                 });
 
                 drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -144,12 +153,16 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                 toggle.syncState();
 
                 navigationView = (NavigationView) findViewById(R.id.nav_view);
+                email = (TextView) findViewById(R.id.useremail);
+
+
+
 
 
                 navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
 
 
-//                spinnerType=(Spinner) findViewById(R.id.Resource);
+                spinnerType=(Spinner) findViewById(R.id.Resource);
 
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -170,8 +183,14 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
 
 
+                mAuth = FirebaseAuth.getInstance();
+                userID = mAuth.getCurrentUser().getUid();
+                mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(userID).child("user info");
+                mCustomercarDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(userID).child("car info");
+
 
                 mRequest = (Button) findViewById(R.id.request);
+
 
 
 
@@ -200,7 +219,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                                         pickupLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                                         pickupMarker = mMap.addMarker(new MarkerOptions().position(pickupLocation).title("My location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_pickup)));
 
-                                        mRequest.setText("Getting your Resource....");
+                                        mRequest.setText("Getting you a parking place..");
 
                                         getClosestParkingPlace();
                                 }
@@ -234,7 +253,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
         GeoQuery geoQuery;
         private void getClosestParkingPlace(){
-                DatabaseReference parkingplaceLocation = FirebaseDatabase.getInstance().getReference().child("parkingplacesAvailable");
+                DatabaseReference parkingplaceLocation = FirebaseDatabase.getInstance().getReference().child("parking Locations");
 
                 GeoFire geoFire = new GeoFire(parkingplaceLocation);
                 geoQuery = geoFire.queryAtLocation(new GeoLocation(pickupLocation.latitude, pickupLocation.longitude), radius);
@@ -244,7 +263,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                         @Override
                         public void onKeyEntered(String key, GeoLocation location) {
                                 if (!parkingplaceFound && requestBol){
-                                        DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(key);
+                                        DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(key).child("user info");
                                         mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -262,9 +281,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                                                                         String customerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                                                         HashMap map = new HashMap();
                                                                         map.put("customerRideId", customerId);
-//                                                                        map.put("destination", destination);
-//                                                                        map.put("destinationLat", destinationLatLng.latitude);
-//                                                                        map.put("destinationLng", destinationLatLng.longitude);
+//
                                                                         parkingRef.updateChildren(map);
 
                                                                         getParkingPlaceLocation();
@@ -306,19 +323,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                         }
                 });
         }
-        /*-------------------------------------------- Map specific functions -----
-        |  Function(s) getDriverLocation
-        |
-        |  Purpose:  Get's most updated driver location and it's always checking for movements.
-        |
-        |  Note:
-        |	   Even tho we used geofire to push the location of the driver we can use a normal
-        |      Listener to get it's location with no problem.
-        |
-        |      0 -> Latitude
-        |      1 -> Longitudde
-        |
-        *-------------------------------------------------------------------*/
+
         private Marker mParkingPlaceMarker;
         private DatabaseReference parkingplaceLocationRef;
         private ValueEventListener parkingplaceLocationRefListener;
@@ -387,26 +392,26 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         /*-------------------------------------------- getDriverInfo -----
         |  Function(s) getDriverInfo
         |
-        |  Purpose:  Get all the user information that we can get from the user's database.
+        |  Purpose:  Get all the user information that we can get from 0the user's database.
         |
         |  Note: --
         |
         *-------------------------------------------------------------------*/
         private void getParkingPlaceInfo(){
                 mParkingPlaceInfo.setVisibility(View.VISIBLE);
-                DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(parkingplaceFoundID);
+                DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(parkingplaceFoundID).child("user info");
                 mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0){
-                                        if(dataSnapshot.child("name")!=null){
-                                                mParkingPlaceName.setText(dataSnapshot.child("name").getValue().toString());
+                                        if(dataSnapshot.child("car park name")!=null){
+                                                mParkingPlaceName.setText(dataSnapshot.child("car park name").getValue().toString());
                                         }
-                                        if(dataSnapshot.child("phone")!=null){
-                                                mParkingPlacePhone.setText(dataSnapshot.child("phone").getValue().toString());
+                                        if(dataSnapshot.child("phone number")!=null){
+                                                mParkingPlacePhone.setText(dataSnapshot.child("phone number").getValue().toString());
                                         }
-                                        if(dataSnapshot.child("car")!=null){
-                                                mParkingPlaceCapacity.setText(dataSnapshot.child("car").getValue().toString());
+                                        if(dataSnapshot.child("Parking Size")!=null){
+                                                mParkingPlaceCapacity.setText(dataSnapshot.child("Parking Size").getValue().toString());
                                         }
                                         if(dataSnapshot.child("profileImageUrl").getValue()!=null){
                                                 Glide.with(getApplication()).load(dataSnapshot.child("profileImageUrl").getValue().toString()).into(mParkingPlaceProfileImage);
@@ -608,7 +613,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
                                 LatLng driverLocation = new LatLng(location.latitude, location.longitude);
 
-                                Marker mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).title(key).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car)));
+                                Marker mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLocation).title("Other Parkingplaces").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_parking)));
                                 mDriverMarker.setTag(key);
 
                                 markers.add(mDriverMarker);
@@ -684,6 +689,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                 return super.onOptionsItemSelected(item);
         }
 
+
         @SuppressWarnings("StatementWithEmptyBody")
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
@@ -694,8 +700,13 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
 
                         case R.id.nav_home:
-                                Intent b= new Intent(map.this,Dashboard.class);
+                                Intent b= new Intent(map.this, com.example.madvincy.safe.CustomerActivities.Dashboard.class);
                                 startActivity(b);
+                                break;
+                        case R.id.nav_parking:
+                                Intent r= new Intent(map.this,ActiveParkingActivity.class);
+                                r.putExtra("customerOrParkingplace", "Customers");
+                                startActivity(r);
                                 break;
 
                         case R.id.nav_slots:
@@ -713,12 +724,16 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
                         case R.id.nav_history:
                                 Intent q= new Intent(map.this,CustomerParkingHistory.class);
-                                q.putExtra("customerOrDriver", "Customers");
+                                q.putExtra("customerOrParkingplace", "Customers");
                                 startActivity(q);
                                 break;
                         case R.id.nav_settings:
                                 Intent a= new Intent(map.this,CustomerSettings.class);
                                 startActivity(a);
+                                break;
+                        case R.id.nav_settings2:
+                                Intent ab= new Intent(map.this,CarSettings.class);
+                                startActivity(ab);
                                 break;
                         case R.id.nav_logout:
                                 FirebaseAuth.getInstance().signOut();
@@ -740,7 +755,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
 
         private FirebaseAuth auth;
-        private TextView email;
+
 
         @SuppressLint("SetTextI18n")
         private void setDataToView(FirebaseUser user) {
@@ -823,5 +838,6 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         }
         polylines.clear();
     }
+
 
 }

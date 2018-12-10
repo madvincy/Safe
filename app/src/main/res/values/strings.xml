@@ -7,6 +7,12 @@
     //facebook
     <string name="facebook_app_id">505431489898763</string>
     <string name="fb_login_protocol_scheme">fb505431489898763</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_phone">Phone</string>
+    <string name="prompt_credit_card">Credit Card</string>
+    <string name="prompt_confirm_password">Confirm Password</string>
+    <string name="action_login">Login</string>
+    <string name="action_register">Register</string>
 
     <string name="actionN_settings">Settings</string>
     <string name="app_name">SAFE</string>
@@ -50,6 +56,8 @@
     <string name="title_activity_import">Import</string>
     <string name="title_activity_slideshow">Slideshow</string>
     <string name="title_activity_tools">Tools</string>
+    <string name="prompt_first_name">First Name</string>
+    <string name="prompt_last_name">Last Name</string>
 
     <array name="genres">
         <item>rock</item>
@@ -61,60 +69,12 @@
         <item>Rent</item>
         <item>personal</item>
     </array>
-    <array name="Tractortype">
-        <item>175 HP Or Greater Tractors</item>
-        <item>100 HP to 174 HP Tractors</item>
-        <item>40 HP to 99 HP Tractors</item>
-        <item>Less than 40 HP Tractors</item>
-        <item>Combines Harvesters</item>
-        <item>Cotton Pickers/Strippers</item>
-        <item>Forage Harvesters</item>
-        <item>Headers</item>
-        <item>Forage Wagons</item>
-        <item>Grain Augers/Conveyors</item>
-        <item>Grain Carts</item>
-        <item>Planting Equipment</item>
-        <item>Air Seeders/Air Carts</item>
-        <item>Grain Drills</item>
-        <item>Planters</item>
-        <item>Seed Tenders</item>
-        <item>Tillage Equipment</item>
-        <item>Disks</item>
-        <item>Field Cultivators</item>
-        <item>Land Rollers</item>
-        <item>Mulch Finishers</item>
-        <item>Plows</item>
-        <item>Rippers</item>
-        <item>Rotary Tillage</item>
-        <item>Row Crop Cultivators</item>
-        <item>Vertical Tillage</item>
-        <item>Hay and Forage Equipment</item>
-        <item>Bale Accumulators / Movers</item>
-        <item>Disc Mowers</item>
-        <item>Mower Conditioners/Windrowers</item>
-        <item>Rakes/Tedders</item>
-        <item>Rotary Mowers</item>
-        <item>Round Balers</item>
-        <item>Square Balers</item>
-        <item>Stalk Choppers/Flail Mowers</item>
-        <item>Tub Grinders/Bale Processors</item>
-        <item>Chemical Applicators</item>
-        <item>Fertilizer Applicators</item>
-        <item>Other Chemical Applicators</item>
+    <array name="Parkingtype">
+        <item>Normal Parking</item>
+        <item>Roof Parking</item>
+        <item>Underground parking</item>
+        <item>automated parking</item>
 
-        <item>Manure Spreaders</item>
-
-        <item>Poultry Litter Equipment</item>
-
-        <item>Material Handling Trailers</item>
-        <item>Livestock Trailers</item>
-
-
-        <item>Riding Lawn Mowers</item>
-        <item>Stand On Lawn Mowers</item>
-        <item>Walk-Behind Lawn Mowers</item>
-        <item>Zero Turn Lawn Mowers</item>
-        <item>Chainsaws</item>
 
     </array>
     <array name="Driverno">
@@ -134,7 +94,7 @@
         <item>on rent</item>
         <item>on sale</item>
     </array>
-    <string name="title_activity_find_machinery">FindMachinery</string>
+    <string name="title_activity_find_machinery">Find Parking</string>
     <string name="add">Add</string>
     <string name="enter_name">Enter name</string>
     <string name="artists">Artists</string>

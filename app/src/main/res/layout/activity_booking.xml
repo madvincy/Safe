@@ -1,9 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".booking.Booking">
+    android:orientation="vertical"
+    android:background="@color/colorLightGray"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".booking.Booking"
+    >
 
-</android.support.constraint.ConstraintLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp">
+
+
+
+                    <LinearLayout
+                        android:id="@+id/car"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+
+                        <LinearLayout
+                            android:id="@+id/containerRoundFlyingTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/bgrounded">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_parking"
+                                android:paddingTop="15dp"
+                                android:paddingRight="15dp"/>
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+
+                                <android.support.v7.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="20sp">
+                                    <fragment
+                                        android:id="@+id/place_autocomplete_fragment"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                                        />
+                                </android.support.v7.widget.CardView>
+                            </RelativeLayout>
+
+                            <!--<AutoCompleteTextView-->
+                                <!--android:id="@+id/txtRoundTo"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:hint="Type Park Email"-->
+                                <!--android:textSize="18sp"-->
+                                <!--android:inputType="text"-->
+                                <!--android:maxLines="1"-->
+                                <!--android:singleLine="true"-->
+                                <!--android:fontFamily="sans-serif"/>-->
+
+                        </LinearLayout>
+
+
+                        <Button
+                            android:id="@+id/DatePicker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:layout_gravity="start"
+                            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                            android:drawablePadding="15dp"
+                            android:text="Select Booking Date"
+                            android:background="@drawable/bgrounded"
+                            android:textColor="@color/colorMediumGray"
+                            android:layout_marginBottom="10dp"
+                            android:padding="15dp"
+                            android:textSize="18sp"
+                            android:textAllCaps="false"
+                            android:fontFamily="sans-serif"/>
+                        <android.support.v7.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="15dp"
+                            android:layout_marginBottom="10dp"
+                            >
+                            <Spinner
+                                android:id="@+id/Resource"
+                                android:layout_gravity="start"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:background="@drawable/bgrounded"
+                                android:textColor="@color/colorMediumGray"
+                                android:layout_alignParentStart="true"
+                                android:entries="@array/Parkingtype"
+                                android:layout_alignParentLeft="true"></Spinner>
+                        </android.support.v7.widget.LinearLayoutCompat>
+
+
+
+
+
+                        <LinearLayout
+                            android:id="@+id/Timepicker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/bgrounded"
+
+                            >
+
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp">
+                                <TimePicker
+                                    android:id="@+id/timePicker1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:hint="Pick opening time"
+                                    android:layout_marginBottom="24dp" />
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/driverInfo"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal"
+                    android:background="@android:color/white"
+                    android:visibility="gone">
+                    <ImageView
+                        android:layout_width="100sp"
+                        android:layout_height="100sp"
+                        android:id="@+id/ProfileImage"
+                        android:src="@drawable/ic_parking"
+                        android:padding="20sp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="40sp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/parkName"
+                            android:paddingBottom="10sp"
+                            android:paddingTop="20sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/parkPhone"
+                            android:paddingBottom="10sp"
+                            android:paddingTop="20sp"/>
+                        <RatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ratingBar"
+                            android:layout_gravity="center"
+                            android:numStars="5"
+                            android:stepSize="0.1"/>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </ScrollView>
+
+
+
+
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/primaryBlue"
+            android:textColor="@color/colorInverted"
+            android:text="Book"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif"/>
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

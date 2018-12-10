@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".parking_place_account_activities.CustomerPreview">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="368dp"
+        android:layout_height="117dp"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/ic_car"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/regi_no"
+        android:layout_width="83dp"
+        android:layout_height="41dp"
+        android:layout_below="@+id/profileImage"
+        android:layout_toEndOf="@+id/profileImage"
+        android:layout_toRightOf="@+id/profileImage"
+        android:gravity="center"
+        android:hint="reg no"
+        android:layout_marginBottom="10dp"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="153dp" />
+
+    <TextView
+        android:id="@+id/car_model"
+        android:layout_width="135dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/regi_no"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:hint="car model"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints,UnknownId"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="208dp" />
+
+    <TextView
+        android:id="@+id/color"
+        android:layout_width="66dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/car_model"
+        android:gravity="center"
+        android:hint="color"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="305dp" />
+
+    <TextView
+        android:id="@+id/ownerid"
+        android:layout_width="116dp"
+        android:layout_height="41dp"
+        android:layout_below="@+id/car_model"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:hint="Owner id"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="254dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/phone_no"
+        android:layout_width="301dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/car_model"
+        android:gravity="center"
+        android:hint="Owner's phone number"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="361dp" />
+        <EditText
+            android:id="@+id/lot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Enter parking lot name"
+            android:inputType="text"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dip"
+        android:text="CONFIRM"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="447dp" />
+
+    </LinearLayout
+       >
+
+
+</android.support.constraint.ConstraintLayout>

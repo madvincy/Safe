@@ -28,7 +28,42 @@
         <activity android:name=".booking.Booking" />
         <activity android:name=".settings.CustomerSettings" />
         <activity android:name=".parkinghistory.CustomerParkingHistory" />
-        <activity android:name=".findparking.User2Park"></activity>
+        <activity android:name=".findparking.User2Park" />
+        <activity android:name=".parking_place_account_activities.login" />
+        <activity android:name=".parking_place_account_activities.create_parkingplace" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA5-20wHzm8Iluv261yeCnIskqULQIj_Xo" />
+
+        <activity android:name=".qrscanner.GenerateQr" />
+        <activity android:name=".ParkingPlace.ParkDashboard" />
+        <activity android:name=".parking_place_account_activities.ResetParkPlacePasswordActivity" />
+        <activity android:name=".parking_place_account_activities.SignUpActivity" />
+        <activity android:name=".parking_place_account_activities.ParkPlaceLocation" />
+        <activity android:name=".parking_place_account_activities.ParkDashboard" />
+        <activity android:name=".parking_place_account_activities.CreateEmployees" />
+        <activity android:name=".parking_place_account_activities.QrScanning" />
+        <activity android:name=".parking_place_account_activities.EmployeeDashboard" />
+        <activity android:name=".parking_place_account_activities.CustomerPreview" />
+        <activity android:name=".parking_place_account_activities.ParkingPlaceHistory" />
+        <activity android:name=".CustomerActivities.CustomerParkingHistory" />
+        <activity android:name=".parking_place_account_activities.AllocateParkingLot" />
+        <activity android:name=".CustomerActivities.ActiveParkingActivity" />
+        <activity android:name=".qrscanner.GenerateQr2" />
+        <activity android:name=".parking_place_account_activities.ConfirmEndParking" />
+        <activity android:name=".parking_place_account_activities.ActiveParking.carbooking" />
+        <activity android:name=".parking_place_account_activities.ActiveParking.CarparkBookingSingle" />
+        <activity android:name=".parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.BookingAdapter" />
+        <activity android:name=".parkinghistory.HistorySingleActivity" />
+        <activity android:name=".booking.ParkBookings" />
+        <activity android:name=".parking_place_account_activities.Myemployees.Employee" />
+        <activity android:name=".CustomerActivities.Dashboard" />
+        <activity android:name=".settings.CarSettings" />
+        <activity android:name=".settings.editCar" />
+        <activity android:name=".settings.editUser" />
+        <activity android:name=".parking_place_account_activities.CarParkHistory.ParkHistory" />
+        <activity android:name=".parking_place_account_activities.CarParkHistory.ParkingHistorySingleActivity"></activity>
     </application>
 
 </manifest>

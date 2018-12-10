@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.madvincy.safe.findparking.map;
 
+import com.example.madvincy.safe.parking_place_account_activities.SignUpActivity;
+import com.example.madvincy.safe.parking_place_account_activities.login;
 import com.facebook.CallbackManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.button3);
-//        driver = (Button) findViewById(R.id.driver);
+        driver = (Button) findViewById(R.id.driver);
         btnReset = (Button) findViewById(R.id.btn_reset_password);
 
 
@@ -64,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SignUp.class));
             }
         });
-//        driver.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, DriverLoginActivity.class));
-//            }
-//        });
+        driver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, login.class));
+            }
+        });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
