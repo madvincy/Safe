@@ -14,6 +14,32 @@
     <!--android:theme="@style/AppTheme.AppBarOverlay"-->
     <!--android:id="@+id/appBarLayout"/>-->
 
+
+    <LinearLayout
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Working "
+            android:layout_margin="10sp"
+            android:id="@+id/workingSwitch"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_qr_scan_btn" />
+
+
+    </LinearLayout>
     <LinearLayout
         android:clipToPadding="false"
         android:gravity="center"
@@ -25,7 +51,7 @@
             android:clickable="true"
             android:id="@+id/bankcardId"
             android:layout_width="160dp"
-            android:layout_height="190dp"
+            android:layout_height="95dp"
             android:layout_margin="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,7 +90,7 @@
             android:clickable="true"
             android:id="@+id/ActiveId"
             android:layout_width="160dp"
-            android:layout_height="190dp"
+            android:layout_height="95dp"
             android:layout_margin="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,7 +137,7 @@
             android:clickable="true"
             android:id="@+id/addEmployee"
             android:layout_width="160dp"
-            android:layout_height="190dp"
+            android:layout_height="95dp"
             android:layout_margin="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,7 +176,7 @@
             android:clickable="true"
             android:id="@+id/booking"
             android:layout_width="160dp"
-            android:layout_height="190dp"
+            android:layout_height="95dp"
             android:layout_margin="10dp">
 
             <LinearLayout
@@ -190,30 +216,104 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+
     </LinearLayout>
     <LinearLayout
         android:clipToPadding="false"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Working "
-            android:layout_margin="10sp"
-            android:id="@+id/workingSwitch"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="bottom|end"
-            android:src="@drawable/ic_qr_scan_btn" />
+        <LinearLayout
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/AccInfoId"
+                android:layout_width="160dp"
+                android:layout_height="95dp"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/cerclebackgroundpurple"
+                        android:src="@drawable/ic_edit_black_24dp"
+                        android:padding="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="My Account"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"
+                        android:layout_margin="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Check your history"
+                        android:padding="5dp"
+                        android:textColor="@android:color/darker_gray"/>
 
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/Extra"
+                android:layout_width="160dp"
+                android:layout_height="95dp"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/cerclebackgroundpink"
+                        android:src="@drawable/ic_lightbulb_outline_black_24dp"
+                        android:padding="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Extra"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"
+                        android:layout_margin="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Review current cars on your parking lot"
+                        android:padding="5dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
 </LinearLayout>

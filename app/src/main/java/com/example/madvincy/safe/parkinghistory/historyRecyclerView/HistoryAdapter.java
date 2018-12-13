@@ -41,7 +41,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolders> {
         if(itemList.get(position).getTime()!=null){
             holder.time.setText(itemList.get(position).getTime());
         }
-        if(itemList.get(position).getTime()!=null){
+        if(itemList.get(position).getEndTime()!=null){
             holder.endtime.setText(itemList.get(position).getEndTime());
         }
     }

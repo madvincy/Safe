@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.madvincy.safe.R;
-import com.example.madvincy.safe.parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.CarParkBookingObject;
+import com.example.madvincy.safe.parking_place_account_activities.CarParkHistory.ParkingHistoryRecyclerView.ParkHistoryObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -90,7 +90,7 @@ public class ParkingHistorySingleActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     String ParkHiId = dataSnapshot.getKey();
-                    Long timestamp = 0L;
+                    Long timestamp = 0L, endtimestamp;
 //                    String distance = "";
                     String customerId="", parklot;
 //                    Double parkingPrice = 0.0;
@@ -98,11 +98,17 @@ public class ParkingHistorySingleActivity extends AppCompatActivity {
                     if(dataSnapshot.child("starting time").getValue() != null){
                         timestamp = Long.valueOf(dataSnapshot.child("starting time").getValue().toString());
                     }
+                    if(dataSnapshot.child("Ending Time").getValue() != null){
+                        endtimestamp = Long.valueOf(dataSnapshot.child("Ending Time").getValue().toString());
+                    }
                     if(dataSnapshot.child("Customer Id").getValue() != null){
                         customerId = String.valueOf(dataSnapshot.child("Customer Id").getValue().toString());
                     }
-                    if(dataSnapshot.child("parking Lot").getValue() != null){
-                        parklot= String.valueOf(dataSnapshot.child("parking Lot").getValue().toString());
+                    if(dataSnapshot.child("Parking Lot").getValue() != null){
+                        parklot= String.valueOf(dataSnapshot.child("Parking Lot").getValue().toString());
+                    }
+                    if(dataSnapshot.child("served by").getValue() != null){
+                        parklot= String.valueOf(dataSnapshot.child("served by").getValue().toString());
                     }
 
 //                    if(dataSnapshot.child("customerPaid").getValue() != null && dataSnapshot.child("parkingplacePaidOut").getValue() == null){
@@ -114,7 +120,7 @@ public class ParkingHistorySingleActivity extends AppCompatActivity {
 //                    }
 
 
-                    CarParkBookingObject obj = new CarParkBookingObject(ParkHiId, getDate(timestamp));
+                   ParkHistoryObject obj = new ParkHistoryObject(ParkHiId, getDate(timestamp));
                     resultsHistory.add(obj);
                     mHistoryAdapter.notifyDataSetChanged();
                 }
@@ -133,7 +139,7 @@ public class ParkingHistorySingleActivity extends AppCompatActivity {
     }
 
     private ArrayList resultsHistory = new ArrayList<Object>();
-    private ArrayList<CarParkBookingObject> getDataSetHistory() {
+    private ArrayList<ParkHistoryObject> getDataSetHistory() {
         return resultsHistory;
     }
 

@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.madvincy.safe.R;
-import com.example.madvincy.safe.parking_place_account_activities.ActiveParking.CarparkBookingSingle;
+import com.example.madvincy.safe.parking_place_account_activities.ActiveParking.ActiveCarsParkingRealtime;
+
 
 public class ActiveParkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -24,7 +25,7 @@ public class ActiveParkViewHolder extends RecyclerView.ViewHolder implements Vie
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(v.getContext(), CarparkBookingSingle.class);
+        Intent intent = new Intent(v.getContext(), ActiveCarsParkingRealtime.class);
         Bundle b = new Bundle();
         b.putString("parkingId", parkingId.getText().toString());
         intent.putExtras(b);

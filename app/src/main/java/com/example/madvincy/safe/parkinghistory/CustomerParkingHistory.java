@@ -125,6 +125,9 @@ public class CustomerParkingHistory extends AppCompatActivity {
                     if(dataSnapshot.child("Ending Time").getValue() != null){
                         endingTime = Long.valueOf(dataSnapshot.child("Ending Time").getValue().toString());
                     }
+                    if(dataSnapshot.child("Parking Lot").getValue() != null){
+                        String parklot= String.valueOf(dataSnapshot.child("Parking Lot").getValue().toString());
+                    }
 
 //                    if(dataSnapshot.child("customerPaid").getValue() != null && dataSnapshot.child("parkingplacePaidOut").getValue() == null){
 //                        if(dataSnapshot.child("charges").getValue() != null){

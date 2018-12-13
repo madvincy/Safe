@@ -80,6 +80,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -96,11 +97,13 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         private DatabaseReference mCustomerDatabase, mCustomercarDatabase;
         private String mProfileImageUrl;
         private ImageView mProfileImage;
-
+        private View header;
+        private ImageView imgProfile;
         private FusedLocationProviderClient mFusedLocationClient;
 
         private Button  mRequest;
         Spinner spinnerType;
+        private DatabaseReference mCusDatabase;
 
         private LatLng pickupLocation;
         private String emaile;
@@ -119,7 +122,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
         private ImageView mParkingPlaceProfileImage;
 
-        private TextView email,mParkingPlaceName, mParkingPlacePhone, mParkingPlaceCapacity;
+        private TextView email,mParkingPlaceName,profileName, mParkingPlacePhone, mParkingPlaceCapacity;
 
         private RadioGroup mRadioGroup;
         private FirebaseAuth mAuth;
@@ -153,7 +156,12 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                 toggle.syncState();
 
                 navigationView = (NavigationView) findViewById(R.id.nav_view);
-                email = (TextView) findViewById(R.id.useremail);
+
+                header = navigationView.getHeaderView(0);
+                email = (TextView) header.findViewById(R.id.useremail);
+                imgProfile = (ImageView) header.findViewById(R.id.imageViewe);
+                profileName = (TextView) header.findViewById(R.id.userName);
+                getNavbarinfo();
 
 
 
@@ -185,6 +193,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
                 mAuth = FirebaseAuth.getInstance();
                 userID = mAuth.getCurrentUser().getUid();
+
                 mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(userID).child("user info");
                 mCustomercarDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(userID).child("car info");
 
@@ -754,34 +763,6 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         }
 
 
-        private FirebaseAuth auth;
-
-
-        @SuppressLint("SetTextI18n")
-        private void setDataToView(FirebaseUser user) {
-
-                email.setText("User Email: " + user.getEmail());
-
-
-        }
-
-        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if (user == null) {
-                                // user auth state is changed - user is null
-                                // launch login activity
-                                finish();
-                        } else {
-                                setDataToView(user);
-
-                        }
-                }
-
-
-        };
 
 
 
@@ -840,4 +821,38 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
     }
 
 
+    public void getNavbarinfo() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        String emailed = user.getEmail();
+        email.setText( emailed );
+
+//            mCustomerDatabase.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                            if(dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0){
+//                                    Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+//                                    if(map.get("full names")!=null){
+//                                           String mName = map.get("full names").toString();
+//                                            profileName.setText("Full Name: " +mName);
+//
+//                                    }
+//
+//                                    if(map.get("profileImageUrl")!=null){
+//                                           String mProfileImageUrle = map.get("profileImageUrl").toString();
+//                                            Glide.with(getApplication()).load(mProfileImageUrle).into(imgProfile);
+//                                    }
+//                            }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                    }
+//            });
+
+
+
+
+
+    }
 }

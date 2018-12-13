@@ -7,16 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.madvincy.safe.R;
-import com.example.madvincy.safe.parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.CarParkBookingObject;
 
 import java.util.List;
 
 public class ParkHistoryAdapter extends RecyclerView.Adapter<ParkHistoryViewHolder> {
 
-    private List<CarParkBookingObject> itemList;
+    private List<ParkHistoryObject> itemList;
     private Context context;
 
-    public ParkHistoryAdapter(List<CarParkBookingObject> itemList, Context context) {
+    public ParkHistoryAdapter(List<ParkHistoryObject> itemList, Context context) {
         this.itemList = itemList;
         this.context = context;
     }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.madvincy.safe.findparking.map;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,14 +21,17 @@ import java.util.Map;
 
 public class editUser extends AppCompatActivity {
   private  EditText mFullnames,mNatid,mPhoneNo;
-  private String mFull,mNatId,mPhon,mSimu,mJina,mKipande;
+  private String mFull,mNatIde,mPhon,mSimu,mJina,userID,mKipande;
+  private  FirebaseAuth mAuth;
+  private Button btnUpdateProfile;
+  private DatabaseReference mDriverDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-        mFullnames = (EditText) findViewById(R.id.fullname);
-        mNatid= (EditText) findViewById(R.id.id);
-        mPhoneNo = (EditText) findViewById(R.id.phone);
+        mFullnames = (EditText) findViewById(R.id.fullnamee);
+        mNatid= (EditText) findViewById(R.id.ide);
+        mPhoneNo = (EditText) findViewById(R.id.phonee);
 
 
         btnUpdateProfile = (Button) findViewById(R.id.btnSaveProfile);
@@ -51,18 +55,19 @@ public class editUser extends AppCompatActivity {
         mDriverDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                 if(map.get("full names")!=null){
                     mFull = map.get("full names").toString();
                     mFullnames.setText(mFull);
 
                 }
                 if(map.get("national id_number")!=null){
-                    mNatId = map.get("national id_number:").toString();
-                    mNatid.setText(mMake);
+                    mNatIde = map.get("national id_number").toString();
+                    mNatid.setText(mNatIde);
                 }
-                if(map.get("model")!=null){
-                    mPhon = map.get("car").toString();
-                    mPhoneNo.setText(mModel);
+                if(map.get("phone number")!=null){
+                    mPhon = map.get("phone number").toString();
+                    mPhoneNo.setText(mPhon);
 
                 }
 
@@ -79,13 +84,8 @@ public class editUser extends AppCompatActivity {
     }
     public void updateProfile() {
         mSimu = mPhoneNo.getText().toString();
-        mJina = mFullNames.getText().toString();
+        mJina =  mFullnames.getText().toString();
         mKipande =  mNatid.getText().toString();
-
-
-
-
-
         Map userInfo = new HashMap();
         userInfo.put("full names", mJina);
         userInfo.put("national id_number", mKipande);

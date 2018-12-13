@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -71,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
         phone_no = (EditText) findViewById(R.id.input_phoneno);
         id_number = (EditText) findViewById(R.id.id_no);
         mProfileImage = (ImageView) findViewById(R.id.profileImage);
-        btnSignUp = (Button) findViewById(R.id.btn_signup);
+        btnSignUp = (Button) findViewById(R.id.btnSignUp);
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -123,7 +125,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     saveUserInformation();
-                                    startActivity(new Intent(SignUpActivity.this, CreateEmployees.class));
+                                    startActivity(new Intent(SignUpActivity.this, ParkPlaceLocation.class));
                                     finish();
                                 }
                             }
@@ -194,6 +196,8 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
 
+        String openingTime= hour+ ": " + min+ " " +format;
+        String closingTime = houre+ " :" + mine+ " " +formate;
 
         Map userInfo = new HashMap();
         userInfo.put("national id_number", id_no);
@@ -204,17 +208,23 @@ public class SignUpActivity extends AppCompatActivity {
         userInfo.put("secret key", secreto);
         userInfo.put("Parking Size", parkingsizee);
         userInfo.put("license key", licen);
-        userInfo.put("opening hour", hour);
-        userInfo.put("opening minute", min);
-        userInfo.put("opening time format", format);
-        userInfo.put("closing hour", houre);
-        userInfo.put("closing minute", mine);
-        userInfo.put("closing time format", formate);
-
-
+        userInfo.put("opening-Time", openingTime);
+        userInfo.put("closing-Time", closingTime);
 
 
         mCustomerDatabase.updateChildren(userInfo);
+        FirebaseAuth authe = FirebaseAuth.getInstance();
+        FirebaseUser usere = auth.getCurrentUser();
+        usere.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(SignUpActivity.this, "Email sent to verify your Account." + task.getException(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
         if (resultUri != null) {
 

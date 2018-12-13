@@ -13,6 +13,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.madvincy.HelperUtils.HelperUtilities;
@@ -129,7 +130,7 @@ public class Booking extends AppCompatActivity {
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-                    mRequest.setText("Getting your Resource....");
+                    mRequest.setText("Booking You Parking Place....");
 
                     getClosestParkingToBook();
                 }
@@ -250,8 +251,10 @@ public class Booking extends AppCompatActivity {
 
             @Override
             public void onGeoQueryReady() {
+
                 if (!ParkingFound)
                 {
+                    Toast.makeText(getApplicationContext(), "No Parking Place found YET!", Toast.LENGTH_SHORT).show();
                     radius++;
                     getClosestParkingToBook();
                 }

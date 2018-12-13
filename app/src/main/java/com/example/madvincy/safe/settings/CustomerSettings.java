@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.madvincy.safe.MainActivity;
 import com.example.madvincy.safe.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,6 +43,7 @@ public class CustomerSettings extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mCusDatabase;
     private ImageButton editProfile;
+    private Uri resultUri;
 
 
     @Override
@@ -50,7 +52,7 @@ public class CustomerSettings extends AppCompatActivity {
         setContentView(R.layout.activity_customerr_settings);
         fullName= (TextView) findViewById(R.id.txtFullName);
         mNatId= (TextView) findViewById(R.id.id);
-        PhoneNo= (TextView) findViewById(R.id.phone);
+        PhoneNo= (TextView) findViewById(R.id.Phone);
         mEmail= (TextView) findViewById(R.id.Email);
         editProfile = (ImageButton) findViewById(R.id.btnEditProfile);
 
@@ -68,12 +70,13 @@ public class CustomerSettings extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, 1);
+                saveUserInformation();
             }
         });
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), editUser.class);
+               Intent intent = new Intent(getApplicationContext(), editUser.class);
                 startActivity(intent);
             }
         });
@@ -81,36 +84,18 @@ public class CustomerSettings extends AppCompatActivity {
 
         getUserInfo();
     }
-    @SuppressLint("SetTextI18n")
-    private void setDataToView(FirebaseUser user) {
-
-        mEmail.setText("User Email: " + user.getEmail());
 
 
-    }
-
-    // this listener will be called when there is change in firebase user session
-    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user == null) {
-                // user auth state is changed - user is null
-                // launch login activity
-                startActivity(new Intent(CustomerSettings.this, MainActivity.class));
-                finish();
-            } else {
-                setDataToView(user);
-
-            }
-        }
-
-
-    };
 
 
     private void getUserInfo(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            String emailed = user.getEmail();
+            mEmail.setText(emailed );
+
+
+
         mCusDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -118,16 +103,16 @@ public class CustomerSettings extends AppCompatActivity {
                     Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                     if(map.get("full names")!=null){
                         mName = map.get("full names").toString();
-                        fullName.setText(mName);
+                        fullName.setText("Full Name: " +mName);
 
                     }
                     if(map.get("national id_number")!=null){
                         mNatid= map.get("national id_number").toString();
-                        mNatId.setText(mNatid);
+                        mNatId.setText("Nat Id: " + mNatid);
                     }
                     if(map.get("phone number")!=null){
                         mphoneno = map.get("phone number").toString();
-                        PhoneNo.setText(mphoneno);
+                        PhoneNo.setText("Phone No: " +mphoneno);
 
                     }
                     if(map.get("profileImageUrl")!=null){

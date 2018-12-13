@@ -52,9 +52,9 @@
         <activity android:name=".CustomerActivities.ActiveParkingActivity" />
         <activity android:name=".qrscanner.GenerateQr2" />
         <activity android:name=".parking_place_account_activities.ConfirmEndParking" />
-        <activity android:name=".parking_place_account_activities.ActiveParking.carbooking" />
-        <activity android:name=".parking_place_account_activities.ActiveParking.CarparkBookingSingle" />
-        <activity android:name=".parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.BookingAdapter" />
+        <activity android:name=".parking_place_account_activities.ActiveParking.ActiveCarsParkingRealtime" />
+        <activity android:name=".parking_place_account_activities.ActiveParking.ActiveParkingSingleActivity" />
+        <activity android:name=".parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.ActiveParkingAdapter" />
         <activity android:name=".parkinghistory.HistorySingleActivity" />
         <activity android:name=".booking.ParkBookings" />
         <activity android:name=".parking_place_account_activities.Myemployees.Employee" />
@@ -63,7 +63,10 @@
         <activity android:name=".settings.editCar" />
         <activity android:name=".settings.editUser" />
         <activity android:name=".parking_place_account_activities.CarParkHistory.ParkHistory" />
-        <activity android:name=".parking_place_account_activities.CarParkHistory.ParkingHistorySingleActivity"></activity>
+        <activity android:name=".parking_place_account_activities.CarParkHistory.ParkingHistorySingleActivity" />
+        <activity android:name=".parking_place_account_activities.ParkSettings.ParkSetting" />
+        <activity android:name=".parking_place_account_activities.ParkSettings.editPark" />
+        <activity android:name=".parking_place_account_activities.ChangePassword"></activity>
     </application>
 
 </manifest>

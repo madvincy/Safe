@@ -11,8 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.madvincy.safe.R;
-import com.example.madvincy.safe.parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.CarParkBookingObject;
-import com.example.madvincy.safe.parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.BookingAdapter;
+import com.example.madvincy.safe.parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.ActiveParkObject;
+import com.example.madvincy.safe.parking_place_account_activities.ActiveParking.ActiveParkingRecyclerView.AtiveParkingAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,9 +50,9 @@ public class ActiveCarsParkingRealtime extends AppCompatActivity {
         mHistoryRecyclerView = (RecyclerView) findViewById(R.id.historyRecyclerView);
         mHistoryRecyclerView.setNestedScrollingEnabled(false);
         mHistoryRecyclerView.setHasFixedSize(true);
-        mHistoryLayoutManager = new LinearLayoutManager(carbooking.this);
+        mHistoryLayoutManager = new LinearLayoutManager(ActiveCarsParkingRealtime.this);
         mHistoryRecyclerView.setLayoutManager(mHistoryLayoutManager);
-        mHistoryAdapter = new BookingAdapter(getDataSetHistory(), carbooking.this);
+        mHistoryAdapter = new AtiveParkingAdapter(getDataSetHistory(), ActiveCarsParkingRealtime.this);
         mHistoryRecyclerView.setAdapter(mHistoryAdapter);
 
 
@@ -114,7 +114,7 @@ public class ActiveCarsParkingRealtime extends AppCompatActivity {
 //                    }
 
 
-                    CarParkBookingObject obj = new CarParkBookingObject(ParkHiId, getDate(timestamp));
+                   ActiveParkObject obj = new  ActiveParkObject(ParkHiId, getDate(timestamp));
                     resultsHistory.add(obj);
                     mHistoryAdapter.notifyDataSetChanged();
                 }
@@ -133,7 +133,7 @@ public class ActiveCarsParkingRealtime extends AppCompatActivity {
     }
 
     private ArrayList resultsHistory = new ArrayList<Object>();
-    private ArrayList<CarParkBookingObject> getDataSetHistory() {
+    private ArrayList< ActiveParkObject> getDataSetHistory() {
         return resultsHistory;
     }
 

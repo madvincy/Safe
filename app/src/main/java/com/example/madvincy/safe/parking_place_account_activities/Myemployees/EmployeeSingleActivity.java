@@ -65,7 +65,7 @@ public class EmployeeSingleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_employee_single);
 
 
-        employeeId = getIntent().getExtras().getString("parkingId");
+        employeeId = getIntent().getExtras().getString("employeeId");
 
 
 

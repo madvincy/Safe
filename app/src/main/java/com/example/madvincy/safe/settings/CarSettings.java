@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.madvincy.safe.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +41,7 @@ public class CarSettings extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDriverDatabase;
     private ImageButton editProfile;
+    private Uri resultUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class CarSettings extends AppCompatActivity {
         mMakeField = (TextView) findViewById(R.id.cmake);
         mModelField = (TextView) findViewById(R.id.cmodel);
         mColorField = (TextView) findViewById(R.id.cColor);
-        mRegnoField = (TextView) findViewById(R.id.Regno);
+        mRegnoField = (TextView) findViewById(R.id.carRegno);
         fullName = (TextView) findViewById(R.id.txtFullName);
         editProfile = (ImageButton) findViewById(R.id.btnEditProfile);
 
@@ -71,7 +73,7 @@ public class CarSettings extends AppCompatActivity {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), editCar.class);
+                Intent intent = new Intent(getApplicationContext(), editCar.class);
                 startActivity(intent);
             }
         });
@@ -87,23 +89,24 @@ public class CarSettings extends AppCompatActivity {
                     Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                     if(map.get("color")!=null){
                         mColor = map.get("color").toString();
-                        mColorField.setText(mColor);
+                        mColorField.setText("Color: " +mColor);
 
                     }
                     if(map.get("make")!=null){
                         mMake = map.get("make").toString();
-                        mMakeField.setText(mMake);
-                    }
-                    if(map.get("model")!=null){
-                        mModel = map.get("car").toString();
-                        mModelField.setText(mModel);
-                        fullName.setText(map.get("color").toString()+ " " + map.get("make").toString()+" "+map.get("Registration number"));
+                        mMakeField.setText("Make: " +mMake);
                     }
                     if(map.get("Registration number")!=null){
                         mRegno = map.get("Registration number").toString();
-                        mRegnoField.setText(mRegno);
+                        mRegnoField.setText("Reg No: " +mRegno);
 
                     }
+                    if(map.get("model")!=null){
+                        mModel = map.get("model").toString();
+                        mModelField.setText("Model: " +mModel);
+                        fullName.setText(map.get("color").toString()+ " " + map.get("make").toString());
+                    }
+
                     if(map.get("profileImageUrl")!=null){
                         mProfileImageUrl = map.get("profileImageUrl").toString();
                         Glide.with(getApplication()).load(mProfileImageUrl).into(mProfileImage);

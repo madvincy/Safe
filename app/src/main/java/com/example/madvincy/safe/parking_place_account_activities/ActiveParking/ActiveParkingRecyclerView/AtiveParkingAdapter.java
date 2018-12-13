@@ -10,23 +10,23 @@ import com.example.madvincy.safe.R;
 
 import java.util.List;
 
-public class AtiveParkingAdapter extends RecyclerView.Adapter<CarParkBookingViewHolder> {
+public class AtiveParkingAdapter extends RecyclerView.Adapter<ActiveParkViewHolder> {
 
-    private List<CarParkBookingObject> itemList;
+    private List<ActiveParkObject> itemList;
     private Context context;
 
-    public AtiveParkingAdapter(List<CarParkBookingObject> itemList, Context context) {
+    public AtiveParkingAdapter(List<ActiveParkObject> itemList, Context context) {
         this.itemList = itemList;
         this.context = context;
     }
 
     @Override
-    public CarParkBookingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ActiveParkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item2_history, null, false);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutView.setLayoutParams(lp);
-        CarParkBookingViewHolder rcv = new CarParkBookingViewHolder(layoutView);
+        ActiveParkViewHolder rcv = new ActiveParkViewHolder(layoutView);
         return rcv;
     }
 
@@ -36,7 +36,7 @@ public class AtiveParkingAdapter extends RecyclerView.Adapter<CarParkBookingView
 //    }
 
     @Override
-    public void onBindViewHolder(CarParkBookingViewHolder holder, final int position) {
+    public void onBindViewHolder(ActiveParkViewHolder holder, final int position) {
         holder.parkingId.setText(itemList.get(position).getParkingId());
         if(itemList.get(position).getTime()!=null){
             holder.time.setText(itemList.get(position).getTime());

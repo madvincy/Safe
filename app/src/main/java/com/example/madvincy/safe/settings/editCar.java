@@ -1,5 +1,6 @@
 package com.example.madvincy.safe.settings;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.example.madvincy.safe.findparking.map;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +27,7 @@ import java.util.Map;
 
 public class editCar extends AppCompatActivity {
     private EditText mMakeField,mColorField,mRegnoField,mModelField,fullName;
-    private String mColor,mMake,mModel,mRegno,mCala ,mMak, mMode , mReg ;
+    private String mColor,mMake,mModel,mRegno,mCala, userID,mMak, mMode , mReg ;
     private FirebaseAuth mAuth;
     private DatabaseReference mDriverDatabase;
     private Button btnUpdateProfile;
@@ -50,6 +53,8 @@ public class editCar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateProfile();
+                Intent intent = new Intent(getApplicationContext(), CarSettings.class);
+                startActivity(intent);
 
             }
         });
@@ -59,6 +64,7 @@ public class editCar extends AppCompatActivity {
         mDriverDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                 if(map.get("color")!=null){
                     mColor = map.get("color").toString();
                     mColorField.setText(mColor);
@@ -69,12 +75,12 @@ public class editCar extends AppCompatActivity {
                     mMakeField.setText(mMake);
                 }
                 if(map.get("model")!=null){
-                    mModel = map.get("car").toString();
+                    mModel = map.get("model").toString();
                     mModelField.setText(mModel);
 
                 }
-                if(map.get("Registration number")!=null){
-                    mRegno = map.get("Registration number").toString();
+                if(map.get("registration number")!=null){
+                    mRegno = map.get("registration number").toString();
                     mRegnoField.setText(mRegno);
                 }
             }

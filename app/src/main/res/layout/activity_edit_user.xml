@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/fullname"
+                        android:id="@+id/fullnamee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="full names"
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/phone"
+                        android:id="@+id/phonee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_phone"
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/id"
+                        android:id="@+id/ide"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="ID NUMBER"
