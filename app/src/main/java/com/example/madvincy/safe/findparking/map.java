@@ -303,7 +303,8 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 //
                                                                         parkingRef.updateChildren(map);
 
-                                                                        getParkingPlacesAround();
+//                                                                        getParkingPlacesAround();
+                                                                        getHasRideEnded();
                                                                         getParkingPlaceLocation();
                                                                         getParkingPlaceInfo();
                                                                         mRequest.setText("Looking for Parking Location....");
@@ -377,6 +378,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
                                         if (distance<100){
                                                 mRequest.setText("You have reached the Parking Place");
+                                                endParkingRequest();
                                         }else{
                                                 mRequest.setText("Parking PlaceFound: " + String.valueOf(distance));
                                         }
@@ -424,13 +426,13 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                         public void onDataChange(DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0){
                                         if(dataSnapshot.child("car park name")!=null){
-                                                mParkingPlaceName.setText(dataSnapshot.child("car park name").getValue().toString());
+                                                mParkingPlaceName.setText("Place Name:"+dataSnapshot.child("car park name").getValue().toString());
                                         }
                                         if(dataSnapshot.child("phone number")!=null){
-                                                mParkingPlacePhone.setText(dataSnapshot.child("phone number").getValue().toString());
+                                                mParkingPlacePhone.setText("Phone :"+dataSnapshot.child("phone number").getValue().toString());
                                         }
                                         if(dataSnapshot.child("Parking Size")!=null){
-                                                mParkingPlaceCapacity.setText(dataSnapshot.child("Parking Size").getValue().toString());
+                                                mParkingPlaceCapacity.setText("Size:"+dataSnapshot.child("Parking Size").getValue().toString());
                                         }
                                         if(dataSnapshot.child("profileImageUrl").getValue()!=null){
                                                 Glide.with(getApplication()).load(dataSnapshot.child("profileImageUrl").getValue().toString()).into(mParkingPlaceProfileImage);
@@ -506,8 +508,8 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                 mParkingPlaceInfo.setVisibility(View.GONE);
                 mParkingPlaceName.setText("");
                 mParkingPlacePhone.setText("");
-                mParkingPlaceCapacity.setText("Destination: --");
-                mParkingPlaceProfileImage.setImageResource(R.mipmap.ic_default_user);
+                mParkingPlaceCapacity.setText("parking size: --");
+                mParkingPlaceProfileImage.setImageResource(R.drawable.ic_parking);
         }
 
         /*-------------------------------------------- Map specific functions -----
