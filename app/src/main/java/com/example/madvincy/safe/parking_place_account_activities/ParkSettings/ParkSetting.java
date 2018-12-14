@@ -26,6 +26,12 @@ import com.example.madvincy.safe.parking_place_account_activities.ParkPlaceLocat
 import com.example.madvincy.safe.parking_place_account_activities.QrScanning;
 import com.example.madvincy.safe.parking_place_account_activities.SignUpActivity;
 import com.example.madvincy.safe.settings.editUser;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,7 +52,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParkSetting extends AppCompatActivity {
+public class ParkSetting extends AppCompatActivity implements OnMapReadyCallback {
     private TextView parkSize,fullName,parkType,mNatId,PhoneNo,mEmail,adressde,licenKey,owner,date1,date2;
     private String mName,mNatid,mphoneno,mEmaile, userID ;
     private String mProfileImageUrl,format,formate;
@@ -81,6 +87,9 @@ public class ParkSetting extends AppCompatActivity {
         changePass = (ImageButton) findViewById(R.id. btnchangepass);
         deleteAcc = (ImageButton) findViewById(R.id.btndeleteAccount);
         changeLoc = (ImageButton) findViewById(R.id.btnchangeLoc);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
 //        int min = datePicker1.getCurrentMinute();
 //        int hour = datePicker1.getCurrentHour();
@@ -119,6 +128,7 @@ public class ParkSetting extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         userID = mAuth.getCurrentUser().getUid();
         mCusDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(userID).child("user info");
+       DatabaseReference mMap = FirebaseDatabase.getInstance().getReference().child("Users");
         mProfileImagee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -311,6 +321,16 @@ public class ParkSetting extends AppCompatActivity {
             finish();
         }
 
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        // Add a marker in Sydney, Australia,
+        // and move the map's camera to the same location.
+        LatLng sydney = new LatLng(-33.852, 151.211);
+        googleMap.addMarker(new MarkerOptions().position(sydney)
+                .title("Marker in Sydney"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
 

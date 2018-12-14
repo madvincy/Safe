@@ -73,6 +73,7 @@ public class Booking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
         spinnerType=(Spinner) findViewById(R.id.Resource);
+        requestService = spinnerType.getSelectedItem().toString();
         timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
 
         btnRoundReturnDatePicker = (Button) findViewById(R.id.DatePicker);
@@ -123,7 +124,7 @@ public class Booking extends AppCompatActivity {
 
                 }else{
 
-                    requestService = spinnerType.getSelectedItem().toString();
+
 
                     requestBol = true;
 
@@ -179,9 +180,9 @@ public class Booking extends AppCompatActivity {
 
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
-            public void onKeyEntered(String key, GeoLocation location) {
+            public void onKeyEntered(final String key, GeoLocation location) {
                 if (!ParkingFound && requestBol){
-                    DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(key);
+                    DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(key).child("user info");
                     mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -193,7 +194,7 @@ public class Booking extends AppCompatActivity {
 
                                 if(driverMap.get("car park type").equals(requestService)){
                                     ParkingFound = true;
-                                    parkingFoundID = dataSnapshot.getKey();
+                                    parkingFoundID = key;
                                     String customerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                                     DatabaseReference parkRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(parkingFoundID).child("Booking");
@@ -254,9 +255,19 @@ public class Booking extends AppCompatActivity {
 
                 if (!ParkingFound)
                 {
-                    Toast.makeText(getApplicationContext(), "No Parking Place found YET!", Toast.LENGTH_SHORT).show();
+
                     radius++;
-                    getClosestParkingToBook();
+
+
+                    if(radius<100) {
+                        getClosestParkingToBook();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "No Parking place found", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(getIntent());
+
+                    }
                 }
             }
 

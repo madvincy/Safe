@@ -163,7 +163,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Find Parking Place"
-                android:id="@+id/request"/>
+                android:id="@+id/request"
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 

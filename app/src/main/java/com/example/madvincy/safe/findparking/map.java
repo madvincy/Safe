@@ -44,6 +44,7 @@ import com.example.madvincy.safe.Dashboard;
 import com.example.madvincy.safe.MainActivity;
 import com.example.madvincy.safe.R;
 import com.example.madvincy.safe.booking.Booking;
+import com.example.madvincy.safe.parking_place_account_activities.SignUpActivity;
 import com.example.madvincy.safe.parkinghistory.CustomerParkingHistory;
 import com.example.madvincy.safe.promotions.InviteFriend;
 import com.example.madvincy.safe.qrscanner.GenerateQr;
@@ -111,6 +112,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         private Boolean requestBol = false;
 
         private Marker pickupMarker;
+
 
         private SupportMapFragment mapFragment;
 
@@ -216,6 +218,10 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                                 }else{
 
                                         requestService = spinnerType.getSelectedItem().toString();
+                                        if(requestService==null)
+                                        {
+                                                Toast.makeText(map.this, "select a valid parking type" , Toast.LENGTH_SHORT).show();
+                                        }
 
                                         requestBol = true;
 
@@ -223,6 +229,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
                                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("customerRequest");
                                         GeoFire geoFire = new GeoFire(ref);
+
                                         geoFire.setLocation(userId, new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
 
                                         pickupLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
@@ -270,7 +277,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
                 geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
                         @Override
-                        public void onKeyEntered(String key, GeoLocation location) {
+                        public void onKeyEntered(final String key, GeoLocation location) {
                                 if (!parkingplaceFound && requestBol){
                                         DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Parkingplaces").child(key).child("user info");
                                         mCustomerDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -282,20 +289,23 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
                                                                         return;
                                                                 }
 
-                                                                if(parkingplaceMap.get("service").equals(requestService)){
+                                                                if(parkingplaceMap.get("car park type").equals(requestService)){
                                                                         parkingplaceFound = true;
-                                                                        parkingplaceFoundID = dataSnapshot.getKey();
+                                                                        parkingplaceFoundID = key;
+                                                                        if(parkingplaceFoundID!=null) {
+                                                                                Toast.makeText(map.this, "parking place found" + parkingplaceFoundID, Toast.LENGTH_SHORT).show();
+                                                                        }
 
                                                                         DatabaseReference parkingRef = FirebaseDatabase.getInstance().getReference().child("Users").child("parkingplaces").child(parkingplaceFoundID).child("customerRequest");
                                                                         String customerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                                                         HashMap map = new HashMap();
-                                                                        map.put("customerRideId", customerId);
+                                                                        map.put("customerCarId", customerId);
 //
                                                                         parkingRef.updateChildren(map);
 
+                                                                        getParkingPlacesAround();
                                                                         getParkingPlaceLocation();
                                                                         getParkingPlaceInfo();
-                                                                        getHasRideEnded();
                                                                         mRequest.setText("Looking for Parking Location....");
                                                                 }
                                                         }
@@ -337,7 +347,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         private DatabaseReference parkingplaceLocationRef;
         private ValueEventListener parkingplaceLocationRefListener;
         private void getParkingPlaceLocation(){
-                parkingplaceLocationRef = FirebaseDatabase.getInstance().getReference().child("parkingPlacesOpen").child(parkingplaceFoundID).child("l");
+                parkingplaceLocationRef = FirebaseDatabase.getInstance().getReference().child("parking Locations").child(parkingplaceFoundID).child("l");
                 parkingplaceLocationRefListener = parkingplaceLocationRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -530,6 +540,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
 
                 mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                 mMap.setMyLocationEnabled(true);
+                mRequest.setVisibility(View.VISIBLE);
         }
 
         LocationCallback mLocationCallback = new LocationCallback(){
@@ -606,7 +617,7 @@ public class map extends FragmentActivity implements OnMapReadyCallback, Navigat
         List<Marker> markers = new ArrayList<Marker>();
         private void getParkingPlacesAround(){
                 getParkingPlacesAroundStarted = true;
-                DatabaseReference ParkingPlaceLocation = FirebaseDatabase.getInstance().getReference().child("parkingplacesAvailable");
+                DatabaseReference ParkingPlaceLocation = FirebaseDatabase.getInstance().getReference().child("parking Locations");
 
                 GeoFire geoFire = new GeoFire(ParkingPlaceLocation);
                 GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(mLastLocation.getLongitude(), mLastLocation.getLatitude()), 999999999);
